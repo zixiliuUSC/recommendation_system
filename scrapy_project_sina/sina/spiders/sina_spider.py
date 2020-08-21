@@ -23,9 +23,14 @@ class SinaSpiderSpider(scrapy.Spider):
         self.options.add_argument('no-sandbox')
         self.options.add_argument('--blink-setting=imagesEnabled=false')
         self.options.add_argument('--disable-gpu')
-        #self.options.add_argument('--ignore-certificate-errors')
-        self.directory = '/home/ubuntu/scrapy_project_sina/data'
-        self.page = 10 # 目前是不合理的，要从外面传进来
+        self.options.add_argument('--ignore-certificate-errors')
+        self.options.add_argument('--disable-javascript')
+        self.options.add_experimental_option('excludeSwitches', ['enable-automation'])
+        self.options.add_argument('--disable-plugins')
+        self.options.add_experimental_option('prefs',{ 'profile.default_content_setting_values': { 'notifications' : 2 }})
+
+        self.directory = "M:\\scrapy_project\\recommendation_system\\scrapy_project_sina\\data"
+        self.page = 1 # 目前是不合理的，要从外面传进来
         self.flag = -1 # 暂时定义这个变量，后面会用到
 
 
@@ -36,8 +41,9 @@ class SinaSpiderSpider(scrapy.Spider):
 
 
     def parse(self, response):
+        #self.logger.info(response.text)
         driver = webdriver.Chrome(chrome_options=self.options)
-        driver.set_page_load_timeout(30)
+        driver.set_page_load_timeout(100)
         driver.get(response.url)
         for i in range(self.page):
         #for i in range(self.page):
@@ -73,14 +79,16 @@ class SinaSpiderSpider(scrapy.Spider):
         #print(item['title'])
         #print(item['time_stamp'])
         #print(item['article'])
-        path = os.path.join(self.directory,item['category']+'.csv')
         
-        data = {'title':[item['title']],'time_stamp':[item['time_stamp']], 'article':[item['article']]}
-        if not os.path.exists(path):
-            pd.DataFrame(data).to_csv(path, mode='w')
-        else:
-            pd.DataFrame(data).to_csv(path, mode='a', header=False)
-        #yield item
+        #path = os.path.join(self.directory,item['category']+'.csv')
+        
+        #data = {'title':[item['title']],'time_stamp':[item['time_stamp']], 'article':[item['article']]}
+        #if not os.path.exists(path):
+        #    pd.DataFrame(data).to_csv(path, mode='w')
+        #else:
+        #    pd.DataFrame(data).to_csv(path, mode='a', header=False)
+        
+        yield item
         
 
             
