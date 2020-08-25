@@ -30,3 +30,10 @@ class filmItem(scrapy.Item):
     article = scrapy.Field()
     time_stamp = scrapy.Field()
     category = scrapy.Field()
+
+class dataItem(scrapy.Item):
+    title = scrapy.Field()
+    article = scrapy.Field()
+    time_stamp = scrapy.Field()
+    category = scrapy.Field()
+    pagetype = scrapy.Field()
