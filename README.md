@@ -8,8 +8,8 @@ This repo includes a full stack pipeline of building a recommendation system, wh
   - 2. Initialized mode: this mode is used for initialize your DB. 
 - This repo can crawl Hot Spot and normal page in Sina news pages. 
 - Usage: 
-  - Updating mode: scrapy crawl sina_spider -a page=1 -a flag=1 # Note: the page here is not valid, since the spider will continue to go to next page until crawl all links that satisfy the time lag. 
-  - Initialized mode: scrapy crawl sina_spider -a page=30 -a flag=0
+  - Updating mode: `scrapy crawl sina_spider -a page=1 -a flag=1 # Note: the page here is not valid, since the spider will continue to go to next page until crawl all links that satisfy the time lag.` 
+  - Initialized mode: `scrapy crawl sina_spider -a page=30 -a flag=0`
  
 - Bugs need to be fixed: 
   - This version set up the skeleton to crawl video page and picture page, but currently the selector in scrapy cannot parse correctly. 
